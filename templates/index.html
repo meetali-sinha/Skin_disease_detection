@@ -1,1 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
 
+<h2>Skin Cancer Detector Using AI</h2>
+
+<div>
+    <!-- Upload form -->
+    <form id="upload-file" action="/predict" method="post" enctype="multipart/form-data">
+        <label for="imageUpload" class="upload-label">Choose...</label>
+        <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg" required>
+        <br><br>
+        <button type="submit" class="btn btn-primary btn-lg">Predict!</button>
+    </form>
+
+    <!-- Show loader while predicting -->
+    <div class="loader" style="display:none;"></div>
+
+    <!-- Result display -->
+    <h3 id="result">
+        <span>{{ prediction if prediction else '' }}</span>
+        {% if confidence %}
+            <br>
+            <small>Confidence: {{ confidence }}%</small>
+        {% endif %}
+    </h3>
+</div>
+
+{% endblock %}
